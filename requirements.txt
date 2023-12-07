@@ -1,0 +1,8 @@
+pandas
+gzip
+json
+ast
+numpy
+re
+textblob
+matplotlib
