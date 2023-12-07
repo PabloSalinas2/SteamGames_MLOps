@@ -1,9 +1,3 @@
 pandas
-json
-ast
-numpy
-re
-textblob
-matplotlib
 fastapi
 uvicorn
