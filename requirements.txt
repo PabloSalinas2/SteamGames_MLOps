@@ -6,3 +6,4 @@ numpy
 re
 textblob
 matplotlib
+fastapi
