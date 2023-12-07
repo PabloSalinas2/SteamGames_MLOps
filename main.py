@@ -2,10 +2,10 @@ from fastapi import FastAPI
 import pandas as pd
 
 
-df_funcion1=pd.read_csv('funcion1.csv')
-df_funcion2=pd.read_csv('funcion2.csv')
-df_funcion3_4=pd.read_csv('funcion3y4.csv')
-df_funcion5=pd.read_csv('funcion5.csv')
+df_funcion1=pd.read_csv('ETL/funcion1.csv')
+df_funcion2=pd.read_csv('ETL/funcion2.csv')
+df_funcion3_4=pd.read_csv('ETL/funcion3y4.csv')
+df_funcion5=pd.read_csv('ETL/funcion5.csv')
 
 app= FastAPI()
 app.title='Steam Games: Querys'
