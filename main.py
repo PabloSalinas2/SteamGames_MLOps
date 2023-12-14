@@ -50,10 +50,6 @@ def UserForGenre( genero : str ): #Debe devolver el usuario que acumula más hor
 
 # Ejemplo de retorno: {"Usuario con más horas jugadas para Género X" : us213ndjss09sdf, "Horas jugadas":[{Año: 2013, Horas: 203}, {Año: 2012, Horas: 100}, {Año: 2011, Horas: 23}]}
 
-
-
-
-
 @app.get("/users_recommend/{anio}")
 def UsersRecommend( year : int ): # Devuelve el top 3 de juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos/neutrales)
     try:
@@ -100,5 +96,4 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
     return {'Negative': negativos, 'Neutral': neutros,'Positive':positivos}
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
-
 
