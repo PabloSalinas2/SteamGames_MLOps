@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import pandas as pd
 
 
-df_funcion1=pd.read_csv('ETL/funcion1.csv')
+df_funcion1=pd.read_csv('ETL/funcion1.csv',encoding='UTF-8')
 df_funcion2=pd.read_csv('ETL/funcion2.csv')
 df_funcion3_4=pd.read_csv('ETL/funcion3y4.csv')
 df_funcion5=pd.read_csv('ETL/funcion5.csv')
