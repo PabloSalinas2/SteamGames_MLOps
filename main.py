@@ -14,7 +14,8 @@ app.title='Steam Games: Querys'
 @app.get("/play_time_genre/{genre}")
 def PlayTimeGenre( genre : str ): #  Debe devolver año con mas horas jugadas para dicho género.
     # pasar a dataframe dentro de la funcion ?
-    print(f'Hello {genre}')
+    respuesta={f'Hello {genre}'}
+    return  respuesta
     # try:
     #     genre=genre.title()
     #     valor_maximo=df_funcion1[df_funcion1['genres']==genre]['playtime_forever'].max()
