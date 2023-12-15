@@ -13,17 +13,14 @@ app.title='Steam Games: Querys'
 
 @app.get("/play_time_genre/{genre}")
 def PlayTimeGenre( genre : str ): #  Debe devolver año con mas horas jugadas para dicho género.
-    # pasar a dataframe dentro de la funcion ?
-    respuesta={f'Hello {genre}'}
-    return  respuesta
-    # try:
-    #     genre=genre.title()
-    #     valor_maximo=df_funcion1[df_funcion1['genres']==genre]['playtime_forever'].max()
-    #     indice=df_funcion1[df_funcion1['playtime_forever']==valor_maximo].index
-    #     resultado=df_funcion1['release_year'].loc[indice].values
-    #     return {f'Año de lanzamiento con mas horas jugadas para el Género {genre}:':resultado[0]}
-    # except Exception as e:
-    #     print('Genero incorrecto')
+    try:
+        genre=genre.title()
+        valor_maximo=df_funcion1[df_funcion1['genres']==genre]['playtime_forever'].max()
+        indice=df_funcion1[df_funcion1['playtime_forever']==valor_maximo].index
+        resultado=df_funcion1['release_year'].loc[indice].values
+        return {f'Año de lanzamiento con mas horas jugadas para el Género {genre}:':resultado[0]}
+    except Exception as e:
+        print('Genero incorrecto')
 
 # Ejemplo de retorno: {"Año de lanzamiento con más horas jugadas para Género X" : 2013}
 
