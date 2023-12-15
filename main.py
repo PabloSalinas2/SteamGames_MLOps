@@ -11,8 +11,6 @@ app= FastAPI()
 app.title='Steam Games: Querys'
 
 
-
-
 @app.get("/play_time_genre/{genre}")
 def PlayTimeGenre( genre : str ): #  Debe devolver año con mas horas jugadas para dicho género.
     # pasar a dataframe dentro de la funcion ?
@@ -26,6 +24,7 @@ def PlayTimeGenre( genre : str ): #  Debe devolver año con mas horas jugadas pa
         print('Genero incorrecto')
 
 # Ejemplo de retorno: {"Año de lanzamiento con más horas jugadas para Género X" : 2013}
+
 
 @app.get("/user_for_genre/{genero}")
 def UserForGenre( genero : str ): #Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
@@ -74,18 +73,14 @@ def UsersNotRecommend( year : int ): # Devuelve el top 3 de juegos MENOS recomen
         return {'No existen datos para el valor ingresado'}
  
 # Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}]
-
-
-
-
+    
 
 @app.get("/sentiment_analysis/{anio}")
 def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuelve una lista con la cantidad de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento.
-    df_año=df_funcion5[df_funcion5['release_year']==year]
     positivos=0
     negativos=0
     neutros=0
-    for i in df_año['sentiment_analysis'].values:
+    for i in df_funcion5['year']:
         if i==0:
             negativos+=1
         elif i==1:
@@ -96,4 +91,3 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
     return {'Negative': negativos, 'Neutral': neutros,'Positive':positivos}
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
-
