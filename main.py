@@ -20,7 +20,7 @@ def PlayTimeGenre( genre : str ): #  Debe devolver año con mas horas jugadas pa
         resultado=df_funcion1['release_year'].loc[indice].values
         return {f'Año de lanzamiento con mas horas jugadas para el Género {genre}:':resultado[0]}
     except Exception as e:
-        print('Genero incorrecto')
+        return {'Genero incorrecto'}
 
 # Ejemplo de retorno: {"Año de lanzamiento con más horas jugadas para Género X" : 2013}
 
