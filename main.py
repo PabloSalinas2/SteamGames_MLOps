@@ -10,6 +10,17 @@ df_funcion5=pd.read_csv('ETL/funcion5.csv')
 app= FastAPI()
 app.title='Steam Games: Querys'
 
+@app.get("/play_time_genre_nueva/{genero}")
+def PlayTime( genero : str ): #  Debe devolver año con mas horas jugadas para dicho género.
+    try:
+        genero=genero.title()
+        valor_maximo=df_funcion1[df_funcion1['genres']==genero]['playtime_forever'].max()
+        indice=df_funcion1[df_funcion1['playtime_forever']==valor_maximo].index
+        resultado=df_funcion1['release_year'].loc[indice].values
+        return {f'Año de lanzamiento con mas horas jugadas para el Género {genero}:':resultado[0]}
+    except Exception as e:
+        return {'Genero incorrecto'}
+    
 
 @app.get("/play_time_genre/{genero}")
 def PlayTimeGenre( genero : str ): #  Debe devolver año con mas horas jugadas para dicho género.
