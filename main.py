@@ -19,7 +19,7 @@ def PlayTime( genero : str ): #  Debe devolver año con mas horas jugadas para d
         valor_maximo=df_funcion1[df_funcion1['genres']==genero]['playtime_forever'].max()
         indice=df_funcion1[df_funcion1['playtime_forever']==valor_maximo].index.values
         resultado=df_funcion1['release_year'].loc[indice].values
-        return {f'Año de lanzamiento con mas horas jugadas para el Género {genero}: valor maximo: {type(indice)}'}
+        return {f'Año de lanzamiento con mas horas jugadas para el Género {genero}: valor maximo: {resultado}'}
     except Exception as e:
         return {'Genero incorrecto'}
     
