@@ -24,20 +24,6 @@ def PlayTimeGenre( genero : str ): #  Debe devolver año con mas horas jugadas p
         return {'Genero incorrecto'}
 
 
-# @app.get("/play_time_genre/{genero}")
-# def PlayTimeGenre( genero : str ): #  Debe devolver año con mas horas jugadas para dicho género.
-#     try:
-#         genero=genero.title()
-#         valor_maximo=df_funcion1[df_funcion1['genres']==genero]['playtime_forever'].max()
-#         indice=df_funcion1[df_funcion1['playtime_forever']==valor_maximo].index
-#         resultado=df_funcion1['release_year'].loc[indice].values
-#         return {f'Año de lanzamiento con mas horas jugadas para el Género {genero}:':resultado[0]}
-#     except Exception as e:
-#         return {'Genero incorrecto'}
-
-# Ejemplo de retorno: {"Año de lanzamiento con más horas jugadas para Género X" : 2013}
-
-
 @app.get("/user_for_genre/{genero}")
 def UserForGenre( genero : str ): #Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año.
     try:
