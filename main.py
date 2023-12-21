@@ -10,7 +10,7 @@ df_funcion2=pd.read_csv('Datos_procesados/funcion2.csv')
 df_funcion3_4=pd.read_csv('Datos_procesados/funcion3y4.csv')
 df_funcion5=pd.read_csv('Datos_procesados/funcion5.csv')
 matriz_utilidad=pd.read_parquet('Datos_procesados/matriz_utilidad.parquet')
-matriz_reducida=pd.read_csv('Datos_procesados/matriz_user-item.csv')
+matriz_reducida=pd.read_parquet('Datos_procesados/matriz_user-item.parquet')
 user_items=pd.read_parquet('Datos_procesados/user_items_clean.parquet')
 
 app= FastAPI()
