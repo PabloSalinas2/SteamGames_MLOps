@@ -3,13 +3,6 @@ DataSets
 steam_games_clean.csv
 user_reviews_clean.csv
 recomendacion.ipynb
-modeloML.ipynb
-
-
-
 pruebas2.py
 pruebas.ipynb
-
 matriz_user-item.parquet
-matriz_utilidad.parquet
-user_item_clean.parquet
