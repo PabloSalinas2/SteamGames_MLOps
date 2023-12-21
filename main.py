@@ -5,14 +5,13 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 
-df_funcion1=pd.read_csv('ETL/funcion1.csv')
-df_funcion2=pd.read_csv('ETL/funcion2.csv')
-df_funcion3_4=pd.read_csv('ETL/funcion3y4.csv')
-df_funcion5=pd.read_csv('ETL/funcion5.csv')
-user_items=pd.read_parquet('Datos_procesados/user_items_clean.parquet')
+df_funcion1=pd.read_csv('Datos_procesados/funcion1.csv')
+df_funcion2=pd.read_csv('Datos_procesados/funcion2.csv')
+df_funcion3_4=pd.read_csv('Datos_procesados/funcion3y4.csv')
+df_funcion5=pd.read_csv('Datos_procesados/funcion5.csv')
 matriz_utilidad=pd.read_parquet('Datos_procesados/matriz_utilidad.parquet')
 matriz_reducida=pd.read_csv('Datos_procesados/matriz_user-item.csv')
-
+user_items=pd.read_parquet('Datos_procesados/user_items_clean.parquet')
 
 app= FastAPI()
 app.title='Steam Games: Querys'
@@ -27,7 +26,6 @@ def PlayTimeGenre( genero : str ): #  Debe devolver año con mas horas jugadas p
         return {f'Año de lanzamiento con mas horas jugadas para el Género {genero}: valor maximo: {resultado}'}
     except Exception as e:
         return {'Genero incorrecto'}
-
 
 
 @app.get("/user_for_genre/{genero}")
