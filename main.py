@@ -1,15 +1,17 @@
 from fastapi import FastAPI
 import pandas as pd
+import fastparquet
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 
-df_funcion1=pd.read_csv('Datos_procesados/funcion1.csv')
-df_funcion2=pd.read_csv('Datos_procesados/funcion2.csv')
-df_funcion3_4=pd.read_csv('Datos_procesados/funcion3y4.csv')
-df_funcion5=pd.read_csv('Datos_procesados/funcion5.csv')
-user_items=pd.read_csv('Datos_procesados/user_items_clean.csv')
-matriz_utilidad=pd.read_csv('Datos_procesados/matriz_utilidad.csv')
+df_funcion1=pd.read_csv('ETL/funcion1.csv')
+df_funcion2=pd.read_csv('ETL/funcion2.csv')
+df_funcion3_4=pd.read_csv('ETL/funcion3y4.csv')
+df_funcion5=pd.read_csv('ETL/funcion5.csv')
+user_items=pd.read_parquet('Datos_procesados/user_items_clean.parquet')
+matriz_utilidad=pd.read_parquet('Datos_procesados/matriz_utilidad.parquet')
 matriz_reducida=pd.read_csv('Datos_procesados/matriz_user-item.csv')
-
 
 
 app= FastAPI()
@@ -95,15 +97,13 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
 
-
-
 @app.get("/recommend_system/{user}")
 def sistema_recomendacion(usuario_objetivo):
     df_nombres=user_items.loc[:,['item_id','item_name']]
-    matriz_similares=matriz_utilidad.loc[:,['Unnamed: 0',usuario_objetivo]]
+    matriz_similares=matriz_utilidad.loc[:,['index',usuario_objetivo]]
     matriz_similares=matriz_similares.sort_values(by=usuario_objetivo,ascending=False).reset_index(drop=True)
     matriz_similares=matriz_similares.iloc[1:,:].reset_index(drop=True)
-    usuario_similar=matriz_similares['Unnamed: 0'][0]
+    usuario_similar=matriz_similares['index'][0]
     lista_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_objetivo].iloc[:,1:].iloc[0]
     # lista_=matriz_reducida.loc['HAHAOHWOW',:]
     lista_juegos_usuario_objetivo=list(lista_[lista_==1].index)
@@ -113,4 +113,3 @@ def sistema_recomendacion(usuario_objetivo):
     recomendaciones= [int(juego) for juego in lista_juegos_usuario_similar if juego not in lista_juegos_usuario_objetivo]
     resultado=list(df_nombres[df_nombres['item_id'].isin(recomendaciones)]['item_name'])
     return resultado[0:5]
-
