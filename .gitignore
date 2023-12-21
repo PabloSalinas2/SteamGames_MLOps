@@ -1,8 +1,9 @@
 proyecto-env/
-DataSets/
+DataSets
 steam_games_clean.csv
 user_reviews_clean.csv
-user_items_clean.csv
 recomendacion.ipynb
 modeloML.ipynb
 pruebas.ipynb
+user_items_clean.csv
+
