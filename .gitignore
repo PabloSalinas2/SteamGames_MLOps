@@ -5,6 +5,5 @@ user_reviews_clean.csv
 recomendacion.ipynb
 pruebas2.py
 pruebas.ipynb
-matriz_user-item.parquet
-matriz_utilidad.parquet
+
 user_items_clean.parquet
