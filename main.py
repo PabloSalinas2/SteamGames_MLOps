@@ -95,19 +95,19 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
 
-@app.get("/recommend_system/{user}")
-def sistema_recomendacion(usuario_objetivo):
-    df_nombres=user_items.loc[:,['item_id','item_name']]
-    matriz_similares=matriz_utilidad.loc[:,['index',usuario_objetivo]]
-    matriz_similares=matriz_similares.sort_values(by=usuario_objetivo,ascending=False).reset_index(drop=True)
-    matriz_similares=matriz_similares.iloc[1:,:].reset_index(drop=True)
-    usuario_similar=matriz_similares['index'][0]
-    lista_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_objetivo].iloc[:,1:].iloc[0]
-    # lista_=matriz_reducida.loc['HAHAOHWOW',:]
-    lista_juegos_usuario_objetivo=list(lista_[lista_==1].index)
-    # #Lista de juegos jugados por usuario similar
-    lista2_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_similar].iloc[:,1:].iloc[0]
-    lista_juegos_usuario_similar=list(lista2_[lista2_==1].index)
-    recomendaciones= [int(juego) for juego in lista_juegos_usuario_similar if juego not in lista_juegos_usuario_objetivo]
-    resultado=list(df_nombres[df_nombres['item_id'].isin(recomendaciones)]['item_name'])
-    return resultado[0:5]
+# @app.get("/recommend_system/{user}")
+# def sistema_recomendacion(usuario_objetivo):
+#     df_nombres=user_items.loc[:,['item_id','item_name']]
+#     matriz_similares=matriz_utilidad.loc[:,['index',usuario_objetivo]]
+#     matriz_similares=matriz_similares.sort_values(by=usuario_objetivo,ascending=False).reset_index(drop=True)
+#     matriz_similares=matriz_similares.iloc[1:,:].reset_index(drop=True)
+#     usuario_similar=matriz_similares['index'][0]
+#     lista_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_objetivo].iloc[:,1:].iloc[0]
+#     # lista_=matriz_reducida.loc['HAHAOHWOW',:]
+#     lista_juegos_usuario_objetivo=list(lista_[lista_==1].index)
+#     # #Lista de juegos jugados por usuario similar
+#     lista2_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_similar].iloc[:,1:].iloc[0]
+#     lista_juegos_usuario_similar=list(lista2_[lista2_==1].index)
+#     recomendaciones= [int(juego) for juego in lista_juegos_usuario_similar if juego not in lista_juegos_usuario_objetivo]
+#     resultado=list(df_nombres[df_nombres['item_id'].isin(recomendaciones)]['item_name'])
+#     return resultado[0:5]
