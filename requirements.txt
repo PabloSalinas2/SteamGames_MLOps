@@ -3,4 +3,4 @@ numpy==1.26.2
 fastapi
 uvicorn
 pyarrow
-fastparquet
+fastparquet==2023.10.1
