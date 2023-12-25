@@ -9,9 +9,9 @@ df_funcion1=pd.read_csv('Datos_procesados/funcion1.csv')
 df_funcion2=pd.read_csv('Datos_procesados/funcion2.csv')
 df_funcion3_4=pd.read_csv('Datos_procesados/funcion3y4.csv')
 df_funcion5=pd.read_csv('Datos_procesados/funcion5.csv')
-# matriz_utilidad=pd.read_parquet('Datos_procesados/matriz_utilidad.parquet')
-# matriz_reducida=pd.read_parquet('Datos_procesados/matriz_user-item.parquet')
-# user_items=pd.read_parquet('Datos_procesados/user_items_clean.parquet')
+matriz_utilidad=pd.read_parquet('Datos_procesados/matriz_utilidad.parquet')
+matriz_user_item=pd.read_parquet('Datos_procesados/matriz_user-item.parquet')
+nombre_juegos=pd.read_parquet('Datos_procesados/nombre_juegos.parquet')
 
 app= FastAPI()
 app.title='Steam Games: Querys'
@@ -95,19 +95,18 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
 
-# @app.get("/recommend_system/{user}")
-# def sistema_recomendacion(usuario_objetivo):
-#     df_nombres=user_items.loc[:,['item_id','item_name']]
-#     matriz_similares=matriz_utilidad.loc[:,['index',usuario_objetivo]]
-#     matriz_similares=matriz_similares.sort_values(by=usuario_objetivo,ascending=False).reset_index(drop=True)
-#     matriz_similares=matriz_similares.iloc[1:,:].reset_index(drop=True)
-#     usuario_similar=matriz_similares['index'][0]
-#     lista_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_objetivo].iloc[:,1:].iloc[0]
-#     # lista_=matriz_reducida.loc['HAHAOHWOW',:]
-#     lista_juegos_usuario_objetivo=list(lista_[lista_==1].index)
-#     # #Lista de juegos jugados por usuario similar
-#     lista2_=matriz_reducida[matriz_reducida['Unnamed: 0']==usuario_similar].iloc[:,1:].iloc[0]
-#     lista_juegos_usuario_similar=list(lista2_[lista2_==1].index)
-#     recomendaciones= [int(juego) for juego in lista_juegos_usuario_similar if juego not in lista_juegos_usuario_objetivo]
-#     resultado=list(df_nombres[df_nombres['item_id'].isin(recomendaciones)]['item_name'])
-#     return resultado[0:5]
+@app.get("/recommend_system/{user}")
+def sistema_recomendacion(usuario_objetivo):
+    matriz_similares=matriz_utilidad.loc[:,['index','jakeybabe']]
+    matriz_similares=matriz_similares.sort_values(by='jakeybabe',ascending=False).reset_index(drop=True)
+    matriz_similares=matriz_similares.iloc[1:,:].reset_index(drop=True)
+
+    # Lista de juegos usuario objetivo
+    usuario_similar=matriz_similares['index'][0] # cambiar esto
+    lista_1=matriz_user_item.columns[matriz_user_item.loc['jakeybabe']==True].to_list()
+    #Lista de juegos jugados por usuario similar
+    lista_2=matriz_user_item.columns[matriz_user_item.loc['8498521623']==True].to_list()
+    recomendaciones= [int(juego) for juego in lista_2 if juego not in lista_1]
+    resultado=list(nombre_juegos[nombre_juegos['item_id'].isin(recomendaciones)]['item_name'])
+    return resultado[0:5]
+
