@@ -3,7 +3,7 @@ import pandas as pd
 import fastparquet
 import pyarrow as pa
 import pyarrow.parquet as pq
-from memory_profiler import profile
+#from memory_profiler import profile
 
 
 
