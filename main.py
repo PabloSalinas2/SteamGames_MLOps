@@ -3,7 +3,7 @@ import pandas as pd
 import fastparquet
 import pyarrow as pa
 import pyarrow.parquet as pq
-from memory_profiler import profile
+# from memory_profiler import profile
 
 
 
@@ -123,7 +123,7 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
 
-@profile
+# @profile
 @app.get("/recommend_system/{user}")
 def sistema_recomendacion(usuario_objetivo):
     # Lectura parcial de matriz utilidad 
