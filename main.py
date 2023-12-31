@@ -3,7 +3,7 @@ import pandas as pd
 import fastparquet
 import pyarrow as pa
 import pyarrow.parquet as pq
-# from memory_profiler import profile
+from memory_profiler import profile
 
 
 
@@ -123,27 +123,23 @@ def sentiment_analysis( year : int ): # Según el año de lanzamiento, se devuel
 
 # Ejemplo de retorno: {Negative = 182, Neutral = 120, Positive = 278}
 
-# @profile
+#@profile
 @app.get("/recommend_system/{user}")
 def sistema_recomendacion(usuario_objetivo):
     # Lectura parcial de matriz utilidad 
-    chunksize = 100
+    chunksize = 1000
     # Ruta al archivo Parquet
     parquet_file_path = 'Datos_procesados/matriz_utilidad.parquet'
     # Configurar el lector Parquet
     parquet_file = pq.ParquetFile(parquet_file_path)
-    num_rows = parquet_file.num_row_groups
+    num_rows = parquet_file.metadata.num_rows
+    num_rows_groups=(parquet_file.num_row_groups)-1
     # Iterar sobre los chunks
-    for i in range(0, num_rows, chunksize):
-        # Calcular el rango de filas para el chunk actual
-        start_row = i
-        end_row = min(i + chunksize, num_rows)
+    for i in range(0, num_rows_groups):
         # Leer el chunk
-        table = pq.read_table(parquet_file_path)# row_groups=list(range(start_row, end_row)))
-        # Convertir la tabla a un DataFrame de Pandas
+        table = parquet_file.read_row_group(i)
+        # # Convertir la tabla a un DataFrame de Pandas
         matriz_utilidad= table.to_pandas()
-
-
 
         matriz_similares=matriz_utilidad.loc[:,['index',usuario_objetivo]]
         matriz_similares=matriz_similares.sort_values(by=usuario_objetivo,ascending=False).reset_index(drop=True)
@@ -166,8 +162,5 @@ def sistema_recomendacion(usuario_objetivo):
 #     UsersNotRecommend('2011')
 #     sentiment_analysis('2011')
 #     # sistema_recomendacion('Whitts')
-
-
-
 
 
