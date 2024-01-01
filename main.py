@@ -26,11 +26,9 @@ def PlayTimeGenre( genero : str ):
     """
     Devuelve el año con mas horas jugadas para un determinado genero
 
-    Args:
-        genre(string) : genero para el cual se calculará la cantidad de horas jugadas
+    Args--> genre(string) : genero para el cual se calculará la cantidad de horas jugadas
 
-    Returns:
-        int: Año con mas horas jugadas 
+    Returns--> int: Año con mas horas jugadas 
     """
     try:
         genero=genero.title()
@@ -47,11 +45,9 @@ def UserForGenre( genero : str ):
     """
     Devuelve el usuario que acumula mas horas jugadas para un genero dado y una lista de horas jugadas por año
 
-    Args:
-        genero(string) : Genero del juego para el cual se mostrará el usuario con mas horas jugadas y la cantidad de horas jugadas por año
+    Args--> genero(string) : Genero del juego para el cual se mostrará el usuario con mas horas jugadas y la cantidad de horas jugadas por año
 
-    Returns:
-        tuple: contiene el nombre de usuario y una lista de diccionarios donde con datos de año y horas de juego acumuladas en el año
+    Returns--> tuple: contiene el nombre de usuario y una lista de diccionarios donde con datos de año y horas de juego acumuladas en el año
     """
     try:
         genero=genero.title() # independientemente de si el usuario coloca el parametro en mayuscula o minuscula, el texto introducido se convierte a un texto con la primer letra en mayusculas y las otrwas en minusculas
@@ -77,11 +73,9 @@ def UsersRecommend( year : int ):
     """
     Devuelve el top 3 de juegos mas recomendados por usuarios para un año determinado
 
-    Args:
-        year(int): Año para el cual se determinarán los juegos mas recomendados
+    Args--> year(int): Año para el cual se determinarán los juegos mas recomendados
     
-    Returns:
-        list: lista de diccionarios, donde la clave indica el puesto y el valor indica el juego
+    Returns--> list: lista de diccionarios, donde la clave indica el puesto y el valor indica el juego
     """
     try:
         df_top3=df_funcion3_4[df_funcion3_4['year']==year].nlargest(3,'recommend')
@@ -100,11 +94,9 @@ def UsersNotRecommend( year : int ):
     """
     Devuelve el top 3 de juegos menos recomendados por usuarios para un año determinado
 
-    Args:
-        year(int): Año para el cual se determinarán los juegos menos recomendados
+    Args--> year(int): Año para el cual se determinarán los juegos menos recomendados
     
-    Returns:
-        list: lista de diccionarios, donde la clave indica el puesto y el valor indica el juego
+    Returns--> list: lista de diccionarios, donde la clave indica el puesto y el valor indica el juego
     """
     try:
         df_top3=df_funcion3_4[df_funcion3_4['year']==year].nsmallest(3,'recommend')
@@ -123,11 +115,9 @@ def sentiment_analysis( year : int ):
     """
     Devuelve un diccionario que muestra la cantidad de comentarios positivos, negativos y neutros para un determinado año
 
-    Args:
-        year(int): Año para el cual se mostrarán la cantidad de comentarios positivos, negativos y neutros dentro de la plataforma Steam Games
+    Args--> year(int): Año para el cual se mostrarán la cantidad de comentarios positivos, negativos y neutros dentro de la plataforma Steam Games
     
-    Returns:
-        Dict: Diccionario donde figuran la cantidad de comentarios positivos, negativos y neutros
+    Returns--> Dict: Diccionario donde figuran la cantidad de comentarios positivos, negativos y neutros
 
     """
     positivos=0
@@ -151,11 +141,9 @@ def sistema_recomendacion(usuario_objetivo):
     """
     Devuelve una lista de juegos recomendados para un usuario determinado
 
-    Args:
-        usuario_objetivo(string): Usuario para el cual se devolverá una lista de juegos recomendados.
+    Args--> usuario_objetivo(string): Usuario para el cual se devolverá una lista de juegos recomendados.
 
-    Returns:
-        list: Lista de juegos recomendados para el usuario_objetivo
+    Returns--> list: Lista de juegos recomendados para el usuario_objetivo
     """
     # Ruta al archivo Parquet
     parquet_file_path = 'Datos_procesados/matriz_utilidad.parquet'
