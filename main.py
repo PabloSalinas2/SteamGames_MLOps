@@ -133,7 +133,8 @@ def sentiment_analysis( year : int ):
     positivos=0
     negativos=0
     neutros=0
-    for i in df_funcion5['year']:
+    dataframe=df_funcion5[df_funcion5['year']==year]
+    for i in dataframe['sentiment_analysis']:
         if i==0:
             negativos+=1
         elif i==1:
@@ -187,5 +188,4 @@ def sistema_recomendacion(usuario_objetivo):
 #     print(UsersNotRecommend(2011))
 #     print(sentiment_analysis('2011'))
 #     print(sistema_recomendacion('Whitts'))
-
 
