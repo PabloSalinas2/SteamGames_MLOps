@@ -3,7 +3,7 @@ DataSets
 steam_games_clean.csv
 user_reviews_clean.csv
 recomendacion.ipynb
-pruebas2.py
+
 pruebas.ipynb
 
 user_items_clean.parquet
