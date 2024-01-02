@@ -167,13 +167,3 @@ def sistema_recomendacion(usuario_objetivo):
         recomendaciones= [int(juego) for juego in lista_2 if juego not in lista_1]
         resultado=list(nombre_juegos[nombre_juegos['item_id'].isin(recomendaciones)]['item_name'])
         return resultado[0:5]
-
-
-# if __name__ == '__main__':
-#     print(PlayTimeGenre('action'))
-#     print(UserForGenre('action'))
-#     print(UsersRecommend(2011))
-#     print(UsersNotRecommend(2011))
-#     print(sentiment_analysis('2011'))
-#     print(sistema_recomendacion('Whitts'))
-
